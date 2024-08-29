@@ -41,7 +41,7 @@ export default function Navbar(){
                 <DropdownMenu>
                     <DropdownMenuTrigger>
                         
-                            <UilBars className=" text-white"/>
+                            <UilBars className=" text-white hover:bg-gray-200"/>
                        
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="bg-neutral-950 text-gray-200 bg-opacity-60">

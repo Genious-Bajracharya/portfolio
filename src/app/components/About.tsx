@@ -48,9 +48,9 @@ export default function About(){
       };
 
     return(
-        <div className="px-20 py-16" id="about">
-            <div className="  flex  flex-col lg:flex-row h-auto  my-8 gap-8">
-                <div className="lg:w-1/3 relative  h-96">
+        <div className="px-4 lg:px-20 lg:py-16 lg:h-screen" id="about">
+            <div className="  flex  flex-col lg:flex-row h-full my-8 lg:my-8 gap-8">
+                <div className="lg:w-1/3 relative h-96  lg:h-full">
                     <Image src="/about.jpg"
                     alt="profile"
                     // layout="fill"
@@ -58,9 +58,9 @@ export default function About(){
                     className=" rounded-lg object-cover "
                     />
                 </div>
-                <div className=" w-ful  lg:w-1/2 ">
+                <div className=" w-full  lg:w-1/2 ">
                     <div>
-                        <h1 className="text-4xl font-bold mb-4 text-white">About Me</h1>
+                        <h1 className="text-6xl font-bold mb-4 text-white">About Me</h1>
                         <p className="text-lg text-gray-200 my-4"> An Aspiring and Enthusiastic Web Developer and Designer ,  passionate about  
                             crafting visually appealing and user-friendly websites. Proficient in HTML, CSS,
                             and JavaScript, React, Next I enjoy translating ideas into engaging online experiences.  
@@ -69,7 +69,7 @@ export default function About(){
                         </p>
                     </div>
                     <div>   
-                        <div className=" flex gap-8 text-gray-200 font-bold ">
+                        <div className=" flex gap-8 text-gray-200 font-bold text-2xl ">
                             <p onClick={()=>setAbout(0)} className="  hover:border-b-2 hover:border-cyan-400 hover:-translate-y-1 hover:scale-110  transition-all duration-500 cursor-pointer ">Skills</p>
                             <p onClick={()=>setAbout(1)} className="  hover:border-b-2 hover:border-cyan-400 hover:-translate-y-1 hover:scale-110 transition-all duration-500 cursor-pointer">Experience</p>
                             <p onClick={()=>setAbout(2)} className="  hover:border-b-2 hover:border-cyan-400 hover:-translate-y-1 hover:scale-110 transition-all duration-500 cursor-pointer">Education</p>

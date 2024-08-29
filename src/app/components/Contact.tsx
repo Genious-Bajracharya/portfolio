@@ -31,7 +31,7 @@ export default function Contact(){
     }
 
     return(
-        <div className="flex flex-col lg:flex-row gap-5  px-20 justify-between h-auto py-16 text-gray-200 " id="contact">
+        <div className="flex flex-col lg:flex-row gap-5 p-4 lg:px-20 justify-between h-auto lg:py-16  text-gray-200 " id="contact">
             <div className="flex flex-col gap-5">
                 <h1 className="text-6xl font-bold mb-4 text-white">Contact Me</h1>
                 <p className="flex items-center">

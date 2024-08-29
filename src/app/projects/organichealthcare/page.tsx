@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button"
 export default function Organic(){
     return(
         <div className=" bg-neutral-950 h-screen">
-            <div className="flex flex-col lg:flex-row gap-5 p-12">
+            <div className="flex flex-col lg:flex-row gap-5 p-4 lg:p-12">
                 {/* <div className="lg:w-1/2 relative  h-96 rounded-xl"> */}
                     <Carousel 
                     

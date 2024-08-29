@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation"
 export default function OtherProjects(){
     const router= useRouter()
     return(
-        <div className=" p-12 bg-neutral-950">
+        <div className=" p-4 lg:p-12 bg-neutral-950">
             <h1 className=" text-gray-200 text-4xl ">Other Projects</h1>
             <div className="flex flex-col lg:flex-row gap-5 mt-2 ">
 

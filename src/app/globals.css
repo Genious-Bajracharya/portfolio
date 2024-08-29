@@ -67,3 +67,35 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+.scroll-snap-y {
+  scroll-snap-type: y mandatory;
+}
+
+.snap-start {
+  scroll-snap-align: start;
+}
+
+.section {
+  /* Ensure that each section takes up at least the full viewport height */
+  min-height: 100vh;
+  /* Add padding or margin if needed for spacing */
+  padding: 0 1rem;
+}
+
+/* Animation for sections */
+@keyframes slideInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-animate {
+  animation: slideInFromBottom 0.5s ease-out;
+}
