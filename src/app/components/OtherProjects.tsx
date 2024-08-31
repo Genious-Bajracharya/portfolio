@@ -15,7 +15,7 @@ export default function OtherProjects(){
                     <div className="h-full w-full relative ">
                         <Image
                             className="rounded-lg h-full w-full object-cover"
-                            src="/fakestore.jpeg"
+                            src="/organic5.png"
                             alt="Project 1"
                             style={{
                                 width: '100%',
@@ -35,7 +35,7 @@ export default function OtherProjects(){
                         </div>
                     </div>
                 </div>
-                <div onClick={()=> router.push('/projects/organichealthcare')} className="  rounded-xl cursor-pointer group overflow-hidden">
+                <div onClick={()=> router.push('/projects/fakestore')} className="  rounded-xl cursor-pointer group overflow-hidden">
                     <div className="h-full w-full relative ">
                         <Image
                             className="rounded-lg h-full w-full object-cover"
@@ -51,19 +51,19 @@ export default function OtherProjects(){
                         <div className=" h-5/6 absolute bottom-0 left-0 right-0 bg-black bg-opacity-80 text-white text-center p-4 rounded-b-lg opacity-0 transform translate-y-full group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                             <div className="flex flex-col h-full justify-between">
                                 <div>
-                                    <p>Organic Healthcare</p>
-                                    <p>A simple app made for the purpose of writing blogs</p>
+                                    <p>Fake Store</p>
+                                    <p>An e-commerce app made using Fake Store API</p>
                                 </div>
                                 <Button variant={"outline"} className="mx-auto text-black hover:bg-transparent hover:text-gray-200" >See More <UilArrowRight/></Button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div onClick={()=> router.push('/projects/organichealthcare')} className="  rounded-xl cursor-pointer group overflow-hidden">
+                <div onClick={()=> router.push('/projects/fitnessapp')} className="  rounded-xl cursor-pointer group overflow-hidden">
                     <div className="h-full w-full relative ">
                         <Image
                             className="rounded-lg h-full w-full object-cover"
-                            src="/fakestore.jpeg"
+                            src="/Fitness1.png"
                             alt="Project 1"
                             style={{
                                 width: '100%',
@@ -75,8 +75,8 @@ export default function OtherProjects(){
                         <div className=" h-5/6 absolute bottom-0 left-0 right-0 bg-black bg-opacity-80 text-white text-center p-4 rounded-b-lg opacity-0 transform translate-y-full group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                             <div className="flex flex-col h-full justify-between">
                                 <div>
-                                    <p>Organic Healthcare</p>
-                                    <p>A simple app made for the purpose of writing blogs</p>
+                                    <p>Fitness App</p>
+                                    <p>A simple  platform for recording your fitness journey</p>
                                 </div>
                                 <Button variant={"outline"} className="mx-auto text-black hover:bg-transparent hover:text-gray-200" >See More <UilArrowRight/></Button>
                             </div>

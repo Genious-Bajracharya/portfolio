@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { UilArrowRight } from '@iconscout/react-unicons';
+import Link from 'next/link';
 
 export default function Projects() {
   const router = useRouter();
@@ -10,8 +11,8 @@ export default function Projects() {
   const projects = [
     {
       title: 'Organic Healthcare',
-      description: 'A simple app made for the purpose of writing blogs',
-      imageSrc: '/fakestore.jpeg',
+      description: 'A fullstack E-commerce application for Organic Products',
+      imageSrc: '/organic1.png',
       link: '/projects/organichealthcare',
     },
     {
@@ -21,10 +22,10 @@ export default function Projects() {
       link: '/projects/fakestore',
     },
     {
-      title: 'Blogs APP',
-      description: 'A simple  platform for writing and sharing blogs',
-      imageSrc: '/fakestore.jpeg',
-      link: '/projects/blogsapp',
+      title: 'Fitness APP',
+      description: 'A simple  platform for recording your fitness journey',
+      imageSrc: '/fitness2.png',
+      link: '/projects/fitnessapp',
     },
   ];
 
@@ -64,9 +65,11 @@ export default function Projects() {
         ))}
       </div>
       <div className="flex justify-center mt-8">
-        <button className="p-2 bg-transparent text-gray-200 border border-cyan-400 rounded-sm w-32 hover:bg-cyan-400 transition-colors ease-in-out duration-200">
-          See More
-        </button>
+        <Link href={'/allprojects'}>
+          <button className="p-2 bg-transparent text-gray-200 border border-cyan-400 rounded-sm w-32 hover:bg-cyan-400 transition-colors ease-in-out duration-200">
+            See More
+          </button>
+        </Link>
       </div>
     </div>
   );

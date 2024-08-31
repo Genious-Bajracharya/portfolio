@@ -17,39 +17,30 @@ export default function Organic(){
     return(
         <div className=" bg-neutral-950 h-screen">
             <div className="flex flex-col lg:flex-row gap-5 p-4 lg:p-12">
-                {/* <div className="lg:w-1/2 relative  h-96 rounded-xl"> */}
-                    <Carousel 
-                    
-                        className="w-full lg:w-1/2  h-full" >
-                        <CarouselContent className="">
-                            <CarouselItem className="  text-white ">
-                                <Image src="/fakestore.jpeg"
-                                        alt="profile"
-                                        height={700}
-                                        width={900}
-                                        style={{
-                                            width: '100%',
-                                            height: 'auto',
-                                          }}
-                                        // layout="fill"
-                                        className=" rounded-xl object-cover  h-full  "
-                                        />
-                                    
+            <div className="w-full lg:w-1/2 h-full">
+                    <Carousel className="w-full h-full">
+                        <CarouselContent>
+                        {['/organic1.png', '/organic2.png', '/organic3.png', '/organic4.png', '/organic5.png', '/organic6.png', '/organic7.png'].map((src, index) => (
+                            <CarouselItem key={index} className="h-96 lg:h-[450px] relative">
+                            <Image
+                                src={src}
+                                alt={`Fitness Image ${index + 1}`}
+                                layout="fill"
+                                objectFit="contain"
+                                className="rounded-xl"
+                            />
                             </CarouselItem>
-                            <CarouselItem className=" bg-red-600 h-76">1</CarouselItem>
-                            <CarouselItem>2</CarouselItem>
-                            <CarouselItem>3</CarouselItem>
-                            
-                        </CarouselContent >
-                        <CarouselPrevious className=" absolute left-1"/>
-                        <CarouselNext className=" absolute right-1" />
-                        
+                        ))}
+                        </CarouselContent>
+                        <CarouselPrevious className="absolute left-1" />
+                        <CarouselNext className="absolute right-1" />
                     </Carousel>
+                    </div>
                     
                 {/* </div> */}
                 <div className=" relative  lg:h-80   ">
                     <h1 className="text-4xl font-bold mb-4 text-white">Organic Healthcare</h1>
-                    <p className=" text-white"> An ecommerce for organic products yada yada yada</p>
+                    <p className=" text-white"> A fullstack E-commerce application for Organic Products</p>
                     <div className="flex flex-col justify-between  h-full gap-4">
                         <div>
                             <h1 className="text-2xl font-bold mb-4 text-white">Features</h1>
@@ -58,6 +49,8 @@ export default function Organic(){
                             <li className=" text-white">E-payment (Khalti)</li>
                             <li className=" text-white">Functional Cart</li>
                             <li className=" text-white">Admin Panel(CRUD)</li>
+                            <li className=" text-white">Stock Management</li>
+                            <li className=" text-white">Order Management</li>
                         </div>
                         <div className="flex gap-5  ">
                             <Button className=" bg-transparent border border-cyan-400 "> <UilGithub className="text-cyan-400  "/> Github</Button>
