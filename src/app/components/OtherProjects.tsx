@@ -15,7 +15,7 @@ export default function OtherProjects(){
                     <div className="h-full w-full relative ">
                         <Image
                             className="rounded-lg h-full w-full object-cover"
-                            src="/organic5.png"
+                            src="/organic5.PNG"
                             alt="Project 1"
                             style={{
                                 width: '100%',
@@ -63,7 +63,7 @@ export default function OtherProjects(){
                     <div className="h-full w-full relative ">
                         <Image
                             className="rounded-lg h-full w-full object-cover"
-                            src="/Fitness1.png"
+                            src="/Fitness1.PNG"
                             alt="Project 1"
                             style={{
                                 width: '100%',
