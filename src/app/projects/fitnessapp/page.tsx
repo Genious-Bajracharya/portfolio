@@ -22,7 +22,7 @@ export default function FitnessApp(){
                     <div className="w-full lg:w-1/2 h-full">
                     <Carousel className="w-full h-full">
                         <CarouselContent>
-                        {['/Fitness1.png', '/fitness2.png', '/fitness3.png', '/fitness4.png', '/fitness5.png'].map((src, index) => (
+                        {['/Fitness1.PNG', '/fitness2.PNG', '/fitness3.PNG', '/fitness4.PNG', '/fitness5.PNG'].map((src, index) => (
                             <CarouselItem key={index} className="h-96 lg:h-[450px] relative">
                             <Image
                                 src={src}

@@ -22,7 +22,7 @@ export default function WeatherApp(){
                     <div className="w-full lg:w-1/2 h-full">
                     <Carousel className="w-full h-full">
                         <CarouselContent>
-                        {['/weather1.png', '/weather2.png'].map((src, index) => (
+                        {['/weather1.PNG', '/weather2.PNG'].map((src, index) => (
                             <CarouselItem key={index} className="h-96 lg:h-[450px] relative">
                             <Image
                                 src={src}

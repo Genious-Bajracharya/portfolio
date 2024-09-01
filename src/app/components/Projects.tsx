@@ -12,7 +12,7 @@ export default function Projects() {
     {
       title: 'Organic Healthcare',
       description: 'A fullstack E-commerce application for Organic Products',
-      imageSrc: '/organic1.png',
+      imageSrc: '/organic1.PNG',
       link: '/projects/organichealthcare',
     },
     {
@@ -24,7 +24,7 @@ export default function Projects() {
     {
       title: 'Fitness APP',
       description: 'A simple  platform for recording your fitness journey',
-      imageSrc: '/fitness2.png',
+      imageSrc: '/fitness2.PNG',
       link: '/projects/fitnessapp',
     },
   ];

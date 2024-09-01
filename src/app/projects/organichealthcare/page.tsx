@@ -21,7 +21,7 @@ export default function Organic(){
             <div className="w-full lg:w-1/2 h-full">
                     <Carousel className="w-full h-full">
                         <CarouselContent>
-                        {['/organic1.png', '/organic2.png', '/organic3.png', '/organic4.png', '/organic5.png', '/organic6.png', '/organic7.png'].map((src, index) => (
+                        {['/organic1.PNG', '/organic2.PNG', '/organic3.PNG', '/organic4.PNG', '/organic5.PNG', '/organic6.PNG', '/organic7.PNG'].map((src, index) => (
                             <CarouselItem key={index} className="h-96 lg:h-[450px] relative">
                             <Image
                                 src={src}
