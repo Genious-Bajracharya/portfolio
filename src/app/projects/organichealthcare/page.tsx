@@ -9,6 +9,7 @@ import {
   } from "@/components/ui/carousel"
   import { UilGithub, UilGlobe  } from '@iconscout/react-unicons'
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
   
 
 
@@ -53,8 +54,10 @@ export default function Organic(){
                             <li className=" text-white">Order Management</li>
                         </div>
                         <div className="flex gap-5  ">
-                            <Button className=" bg-transparent border border-cyan-400 "> <UilGithub className="text-cyan-400  "/> Github</Button>
-                            <Button className=" bg-transparent border border-cyan-400"><UilGlobe className="text-cyan-400   "/> Visit Site</Button>
+                            <Link href={'https://github.com/Genious-Bajracharya/Organic-Healthcare'}>
+                                <Button className=" bg-transparent border border-cyan-400 "> <UilGithub className="text-cyan-400  "/> Github</Button>
+                            </Link>
+                            
                                 
                         </div>
                     </div>  

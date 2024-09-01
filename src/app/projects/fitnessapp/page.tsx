@@ -9,6 +9,7 @@ import {
   } from "@/components/ui/carousel"
   import { UilGithub, UilGlobe  } from '@iconscout/react-unicons'
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
   
 
 
@@ -52,12 +53,14 @@ export default function FitnessApp(){
                         </ul>
                         </div>
                         <div className="flex gap-5">
-                        <Button className="bg-transparent border border-cyan-400">
-                            <UilGithub className="text-cyan-400" /> Github
-                        </Button>
-                        <Button className="bg-transparent border border-cyan-400">
+                            <Link href={"https://github.com/Genious-Bajracharya/FitnessApp"}>
+                                <Button className="bg-transparent border border-cyan-400">
+                                    <UilGithub className="text-cyan-400" /> Github
+                                </Button>
+                            </Link>
+                        {/* <Button className="bg-transparent border border-cyan-400">
                             <UilGlobe className="text-cyan-400" /> Visit Site
-                        </Button>
+                        </Button> */}
                         </div>
                     </div>
                     </div>

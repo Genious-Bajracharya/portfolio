@@ -57,8 +57,9 @@ export default function FakeStore(){
 
                         </div>
                         <div className="flex gap-5  ">
-                            
-                            <Button className=" bg-transparent border border-cyan-400 "> <UilGithub className="text-cyan-400  "/> Github</Button>
+                            <Link href={"https://github.com/Genious-Bajracharya/OnlineStore"}>
+                                <Button className=" bg-transparent border border-cyan-400 "> <UilGithub className="text-cyan-400  "/> Github</Button>
+                            </Link>
                             <Link href={'https://geniefakestore.netlify.app/'}>
                                 <Button  className=" bg-transparent border border-cyan-400"><UilGlobe className="text-cyan-400   "/> Visit Site</Button>
                             </Link>
