@@ -65,7 +65,7 @@ export default function Projects() {
         ))}
       </div>
       <div className="flex justify-center mt-8">
-        <Link href={'./allprojects'}>
+        <Link href={'../allprojects'}>
           <button className="p-2 bg-transparent text-gray-200 border border-cyan-400 rounded-sm w-32 hover:bg-cyan-400 transition-colors ease-in-out duration-200">
             See More
           </button>

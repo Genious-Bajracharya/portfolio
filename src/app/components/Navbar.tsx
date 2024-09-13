@@ -32,7 +32,6 @@ export default function Navbar(){
                 <div className=" flex gap-5 text-white ">
                     <div onClick={()=> router.push('#about')}  className=" hover:border-b-2 hover:border-cyan-400 hover:-translate-y-1 hover:scale-110 transition-all duration-500 cursor-pointer">About</div>
                     <div onClick={()=> router.push('#contact')} className=" hover:border-b-2 hover:border-cyan-400 hover:-translate-y-1 hover:scale-110 transition-all duration-500 cursor-pointer">Contact</div>
-                    <div className=" hover:border-b-2 hover:border-cyan-400 hover:-translate-y-1 hover:scale-110  transition-all duration-500 cursor-pointer">Socials</div>
                     <div onClick={()=> router.push('#projects')} className=" hover:border-b-2 hover:border-cyan-400 hover:-translate-y-1 hover:scale-110  transition-all  duration-500 cursor-pointer">Projects</div>
                 </div>
             </div>
