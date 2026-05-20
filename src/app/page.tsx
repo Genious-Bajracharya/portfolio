@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
+import SkillsExperienceEducation from "./components/SkillsExperienceEducation";
 import Project from "./components/Projects";
 import Contact from "./components/Contact";
 import { SplashLoader } from "@/components/splash-loader";
@@ -42,7 +43,12 @@ export default function Home() {
           <section id="about" className="min-h-screen py-20 snap-start">
             <About />
           </section>
-        
+
+          {/* Skills, Experience, Education Section */}
+          <section className="py-20 snap-start">
+            <SkillsExperienceEducation />
+          </section>
+
           {/* Projects Section */}
           <section id="projects" className="min-h-screen py-20 snap-start">
             <Project />

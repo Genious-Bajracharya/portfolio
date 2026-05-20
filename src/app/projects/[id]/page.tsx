@@ -1,16 +1,8 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import OtherProjects from "@/app/components/OtherProjects";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
+import { CarouselGallery } from "@/components/carousel-gallery";
 import { Github, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -21,9 +13,6 @@ import { notFound } from "next/navigation";
 
 export default function ProjectDetail({ params }: { params: { id: string } }) {
   const project = projectsData.find((p) => p.id === params.id);
-  const plugin = React.useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true })
-  );
 
   if (!project) {
     notFound();
@@ -33,39 +22,21 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
     <div className="bg-background min-h-screen text-foreground relative selection:bg-primary/20">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 lg:px-12 py-12 lg:py-20 flex flex-col lg:flex-row gap-12">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="w-full lg:w-3/5 group"
+          className="w-full lg:w-3/5"
         >
-          <Carousel 
-            plugins={[plugin.current as any]}
-            className="w-full shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] rounded-3xl overflow-hidden bg-muted/20 border border-border/50"
-            onMouseEnter={plugin.current.stop}
-            onMouseLeave={plugin.current.reset}
-          >
-            <CarouselContent>
-              {project.images.map((src, index) => (
-                <CarouselItem key={index} className="h-[350px] sm:h-[450px] lg:h-[600px] relative">
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent z-10 pointer-events-none" />
-                  <Image
-                    src={src}
-                    alt={`${project.title} - Image ${index + 1}`}
-                    fill
-                    className="object-contain p-4 lg:p-8 filter drop-shadow-xl transition-transform duration-700 hover:scale-[1.02]"
-                  />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <div className="hidden sm:block">
-              <CarouselPrevious className="absolute left-6 h-12 w-12 opacity-0 group-hover:opacity-100 transition-all duration-300 bg-background/80 hover:bg-background text-foreground" />
-              <CarouselNext className="absolute right-6 h-12 w-12 opacity-0 group-hover:opacity-100 transition-all duration-300 bg-background/80 hover:bg-background text-foreground" />
-            </div>
-          </Carousel>
+          <CarouselGallery
+            images={project.images}
+            title={project.title}
+            autoplay
+            autoplayDelay={5000}
+          />
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -90,8 +61,8 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
             </h2>
             <ul className="space-y-4 relative z-10">
               {project.features.map((feature, i) => (
-                <motion.li 
-                  key={i} 
+                <motion.li
+                  key={i}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 + (i * 0.1) }}
@@ -122,8 +93,8 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
           </div>
         </motion.div>
       </div>
-      
-      <motion.div 
+
+      <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}

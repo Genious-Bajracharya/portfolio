@@ -15,22 +15,22 @@ export default function Projects() {
       title: "Organic Healthcare",
       description: "A fullstack e-commerce application for organic products.",
       tags: ["Next.js", "Tailwind", "Node.js"],
-      imageSrc: "/organic1.PNG",
+      imageSrc: "/organic1.jpeg",
       link: "/projects/organichealthcare",
     },
     {
-      title: "Fake Store",
-      description: "An e-commerce app made using Fake Store API.",
-      tags: ["React", "API", "CSS"],
-      imageSrc: "/fakestore.jpeg",
-      link: "/projects/fakestore",
+      title: "ChatApp",
+      description: "A real-time full-stack chat application with Socket.IO.",
+      tags: ["Socket.IO", "Express", "React"],
+      imageSrc: "/chatapp1.png",
+      link: "/projects/chatapp",
     },
     {
-      title: "Fitness APP",
-      description: "A platform for recording your fitness journey.",
-      tags: ["MERN", "Redux", "Tailwind"],
-      imageSrc: "/fitness2.PNG",
-      link: "/projects/fitnessapp",
+      title: "Ghar Bhada",
+      description: "A rental property listing platform for Nepal.",
+      tags: ["Next.js", "Prisma", "Leaflet"],
+      imageSrc: "/gharbhada1.png",
+      link: "/projects/gharbhada",
     },
   ];
 
@@ -76,6 +76,7 @@ export default function Projects() {
                 src={project.imageSrc}
                 alt={project.title}
                 fill
+                priority={index === 0}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
               <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500" />

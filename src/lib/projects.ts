@@ -23,7 +23,7 @@ export const projectsData: Project[] = [
       "Order Management",
     ],
     images: [
-      "/organic1.PNG",
+      "/organic1.jpeg",
       "/organic2.PNG",
       "/organic3.PNG",
       "/organic4.PNG",
@@ -54,7 +54,7 @@ export const projectsData: Project[] = [
       "Admin Panel (CRUD)",
     ],
     images: [
-      "/Fitness1.PNG",
+      "/fitness1.jpeg",
       "/fitness2.PNG",
       "/fitness3.PNG",
       "/fitness4.PNG",
@@ -87,5 +87,35 @@ export const projectsData: Project[] = [
     ],
     images: ["/weather1.PNG", "/weather2.PNG"],
     liveUrl: "https://weathergb.netlify.app/",
+  },
+  {
+    id: "chatapp",
+    title: "ChatApp",
+    description: "A real-time full-stack chat application with Socket.IO.",
+    features: [
+      "Real-time messaging with Socket.IO",
+      "JWT Authentication",
+      "Friend system (send/accept/reject requests)",
+      "Online/Offline presence indicators",
+      "Admin dashboard with user impersonation",
+      "Discord/Slack-inspired UI",
+    ],
+    images: ["/chatapp1.png"],
+    githubUrl: "https://github.com/Genious-Bajracharya/ChatApp",
+  },
+  {
+    id: "gharbhada",
+    title: "Ghar Bhada",
+    description: "A rental property listing platform for Nepal.",
+    features: [
+      "Property listings with map integration (Leaflet)",
+      "User Authentication",
+      "Admin dashboard",
+      "Real-time chat via Socket.IO",
+      "Property search and filters",
+      "Next.js 16 + Prisma + TypeScript",
+    ],
+    images: ["/gharbhada1.png"],
+    githubUrl: "https://github.com/Genious-Bajracharya/GharBhada",
   },
 ];

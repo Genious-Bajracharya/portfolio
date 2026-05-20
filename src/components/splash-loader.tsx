@@ -7,21 +7,40 @@ export function SplashLoader({ onComplete }: { onComplete: () => void }) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    // Check if splash already shown this session
+    const splashShown = sessionStorage.getItem("splashLoaded");
+    if (splashShown) {
+      onComplete();
+      return;
+    }
+
     let currentProgress = 0;
     const interval = setInterval(() => {
-      currentProgress += Math.floor(Math.random() * 15) + 5;
+      currentProgress += Math.floor(Math.random() * 20) + 15;
       if (currentProgress > 100) currentProgress = 100;
       setProgress(currentProgress);
 
       if (currentProgress === 100) {
         clearInterval(interval);
+        // Mark splash as shown this session
+        sessionStorage.setItem("splashLoaded", "true");
         setTimeout(() => {
           onComplete();
-        }, 500); // short delay after hitting 100%
+        }, 300);
       }
-    }, 150);
+    }, 100);
 
-    return () => clearInterval(interval);
+    // Hard cap at 1200ms total time
+    const timeout = setTimeout(() => {
+      clearInterval(interval);
+      sessionStorage.setItem("splashLoaded", "true");
+      onComplete();
+    }, 1200);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
   }, [onComplete]);
 
   return (

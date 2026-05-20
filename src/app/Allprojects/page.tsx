@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,11 @@ import Navbar from "@/app/components/Navbar";
 
 export default function AllProjects() {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
 
   return (
     <div className="bg-background min-h-screen text-foreground relative selection:bg-primary/20">
@@ -40,7 +46,31 @@ export default function AllProjects() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projectsData.map((project, index) => (
+          {isLoading ? (
+            // Skeleton loading
+            Array(6).fill(0).map((_, index) => (
+              <div
+                key={`skeleton-${index}`}
+                className="rounded-3xl overflow-hidden border border-border/50 bg-card h-full flex flex-col animate-pulse"
+              >
+                <div className="relative h-64 w-full bg-muted" />
+                <div className="p-6 md:p-8 flex flex-col flex-1">
+                  <div className="h-6 bg-muted rounded w-3/4 mb-4" />
+                  <div className="space-y-3">
+                    <div className="h-3 bg-muted rounded w-full" />
+                    <div className="h-3 bg-muted rounded w-5/6" />
+                    <div className="h-3 bg-muted rounded w-4/6" />
+                  </div>
+                  <div className="flex gap-2 mt-6">
+                    <div className="h-6 bg-muted rounded-md w-16" />
+                    <div className="h-6 bg-muted rounded-md w-20" />
+                    <div className="h-6 bg-muted rounded-md w-16" />
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            projectsData.map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 30 }}
@@ -75,7 +105,8 @@ export default function AllProjects() {
                 </div>
               </div>
             </motion.div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </div>
