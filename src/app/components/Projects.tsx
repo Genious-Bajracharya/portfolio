@@ -1,78 +1,122 @@
-'use client'
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { UilArrowRight } from '@iconscout/react-unicons';
-import Link from 'next/link';
+"use client";
+
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Projects() {
   const router = useRouter();
 
   const projects = [
     {
-      title: 'Organic Healthcare',
-      description: 'A fullstack E-commerce application for Organic Products',
-      imageSrc: '/organic1.PNG',
-      link: '/projects/organichealthcare',
+      title: "Organic Healthcare",
+      description: "A fullstack e-commerce application for organic products.",
+      tags: ["Next.js", "Tailwind", "Node.js"],
+      imageSrc: "/organic1.PNG",
+      link: "/projects/organichealthcare",
     },
     {
-      title: 'Fake Store',
-      description: 'An e-commerce app made using Fake Store API',
-      imageSrc: '/fakestore.jpeg',
-      link: '/projects/fakestore',
+      title: "Fake Store",
+      description: "An e-commerce app made using Fake Store API.",
+      tags: ["React", "API", "CSS"],
+      imageSrc: "/fakestore.jpeg",
+      link: "/projects/fakestore",
     },
     {
-      title: 'Fitness APP',
-      description: 'A simple  platform for recording your fitness journey',
-      imageSrc: '/fitness2.PNG',
-      link: '/projects/fitnessapp',
+      title: "Fitness APP",
+      description: "A platform for recording your fitness journey.",
+      tags: ["MERN", "Redux", "Tailwind"],
+      imageSrc: "/fitness2.PNG",
+      link: "/projects/fitnessapp",
     },
   ];
 
   return (
-    <div className="p-4 lg:px-20 lg:py-18" id="projects">
-      <h1 className="text-4xl font-bold mb-8 text-white">My Projects</h1>
-      <div className="flex flex-col gap-8 lg:flex-row">
+    <div className="w-full max-w-7xl mx-auto px-4 lg:px-20 py-16" id="projects">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="flex justify-between items-end mb-12"
+      >
+        <div>
+          <h2 className="text-5xl md:text-6xl font-bold text-foreground tracking-tight">
+            My <span className="text-primary">Projects</span>
+          </h2>
+          <p className="text-muted-foreground mt-4 text-lg">
+            A selection of my recent works and personal projects.
+          </p>
+        </div>
+        <Link href="/allprojects" className="hidden md:inline-flex">
+          <Button variant="outline" className="group rounded-full px-6">
+            View All
+            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+          </Button>
+        </Link>
+      </motion.div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project, index) => (
-          <div
+          <motion.div
             key={index}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            className="group relative rounded-3xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-shadow bg-card"
             onClick={() => router.push(project.link)}
-            className="group relative rounded-xl cursor-pointer overflow-hidden lg:flex-1 shadow-lg shadow-black hover:shadow-gray-600"
           >
-            <div className="relative h-96 lg:h-[450px] w-full">
+            <div className="relative h-64 w-full overflow-hidden">
               <Image
-                className="rounded-lg"
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
                 src={project.imageSrc}
                 alt={project.title}
-                layout="fill"
-                objectFit="cover"
-                priority={true}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-80 text-white text-center p-4 rounded-b-lg opacity-0 transform translate-y-full group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-center">
-                <div>
-                  <h2 className="text-xl font-semibold">{project.title}</h2>
-                  <p className="mt-2">{project.description}</p>
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500" />
+            </div>
+
+            <div className="p-6 md:p-8 bg-card border-t border-border flex flex-col justify-between h-56 transition-colors">
+              <div>
+                <h3 className="text-2xl font-bold text-card-foreground mb-2 group-hover:text-primary transition-colors">
+                  {project.title}
+                </h3>
+                <p className="text-muted-foreground text-sm line-clamp-2 mb-4">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs font-medium px-2.5 py-1 bg-secondary text-secondary-foreground rounded-md"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-                <Button
-                  variant="outline"
-                  className="mt-4 mx-auto text-black hover:bg-transparent hover:text-gray-200"
-                >
-                  See More <UilArrowRight />
-                </Button>
+              </div>
+              
+              <div className="flex items-center text-sm font-semibold text-primary opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                View Project <ExternalLink className="ml-2 w-4 h-4" />
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
-      <div className="flex justify-center mt-8">
-        <Link href={'../allprojects'}>
-          <button className="p-2 bg-transparent text-gray-200 border border-cyan-400 rounded-sm w-32 hover:bg-cyan-400 transition-colors ease-in-out duration-200">
-            See More
-          </button>
+
+      <div className="flex justify-center mt-12 md:hidden">
+        <Link href="/allprojects">
+          <Button variant="outline" className="rounded-full px-8 group">
+            View All Projects
+            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+          </Button>
         </Link>
       </div>
     </div>
   );
 }
-
-

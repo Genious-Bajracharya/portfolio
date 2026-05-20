@@ -1,37 +1,59 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Project from "./components/Projects";
 import Contact from "./components/Contact";
-import { useInView } from 'react-intersection-observer';
+import { SplashLoader } from "@/components/splash-loader";
 
 export default function Home() {
-
-  // const { ref: heroRef, inView: heroInView } = useInView({ triggerOnce: true });
-  // const { ref: aboutRef, inView: aboutInView } = useInView({ triggerOnce: true });
-  // const { ref: projectRef, inView: projectInView } = useInView({ triggerOnce: true });
-  // const { ref: contactRef, inView: contactInView } = useInView({ triggerOnce: true });
+  const [loading, setLoading] = useState(true);
 
   return (
-    <div className="bg-neutral-950 scroll-snap-y scroll-snap-mandatory overflow-y-scroll h-screen">
-      <section className="snap-start bg-[url('https://img.freepik.com/free-photo/3d-portrait-people_23-2150793856.jpg?t=st=1723725933~exp=1723729533~hmac=80918bb4ad8f4e7c816c7e3380cf1695378c69fe267021ce5e4030337d85c56d&w=1060')] bg-no-repeat bg-cover bg-center min-h-screen">
-        <Navbar />
-        <Hero />
-      </section>
-      
-      <section className="snap-start">
-        <About />
-      </section>
-     
-      <section className="snap-start">
-        <Project />
-      </section>
-    
-      <section className="snap-start">
-        <Contact />
-      </section>
-    </div>
+    <>
+      <AnimatePresence mode="wait">
+        {loading && <SplashLoader onComplete={() => setLoading(false)} />}
+      </AnimatePresence>
+
+      <motion.div
+        initial={false}
+        animate={loading ? "hidden" : "visible"}
+        variants={{
+          hidden: { opacity: 0, height: "100vh", overflow: "hidden" },
+          visible: { opacity: 1, height: "100vh", overflowY: "scroll" },
+        }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="bg-background text-foreground scroll-smooth snap-y snap-mandatory"
+      >
+        <div className="sticky top-0 z-50">
+          <Navbar />
+        </div>
+        
+        <main className="flex flex-col">
+          {/* Hero Section */}
+          <section id="hero" className="min-h-screen flex items-center justify-center relative snap-start">
+            <Hero />
+          </section>
+          
+          {/* About Section */}
+          <section id="about" className="min-h-screen py-20 snap-start">
+            <About />
+          </section>
+        
+          {/* Projects Section */}
+          <section id="projects" className="min-h-screen py-20 snap-start">
+            <Project />
+          </section>
+        
+          {/* Contact Section */}
+          <section id="contact" className="min-h-screen py-20 snap-start">
+            <Contact />
+          </section>
+        </main>
+      </motion.div>
+    </>
   );
 }
-

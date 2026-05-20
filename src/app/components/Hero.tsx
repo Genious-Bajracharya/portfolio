@@ -1,47 +1,89 @@
-'use client'
-import { useEffect, useState } from "react"
+"use client";
+
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function Hero() {
-    const roles: string[] = ['Frontend Developer', 'React Developer', 'MERN Developer'];
-    const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
-    const [displayedText, setDisplayedText] = useState('');
-    const [typingIndex, setTypingIndex] = useState(0);
+  const roles = ["Frontend Developer", "React Developer", "MERN Stack Expert"];
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+  const router = useRouter();
 
-    useEffect(() => {
-        const currentRole = roles[currentRoleIndex];
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [roles.length]);
 
-        if (!currentRole) return; // Ensure currentRole is valid
-
-        const typingInterval = setInterval(() => {
-            if (typingIndex < currentRole.length) {
-                // Add the next character to the displayed text
-                setDisplayedText((prev) => prev + currentRole[typingIndex]);
-                setTypingIndex((prev) => prev + 1);
-            } else {
-                clearInterval(typingInterval);
-
-                // Pause before switching to the next role
-                setTimeout(() => {
-                    setTypingIndex(0);
-                    setDisplayedText('');
-                    setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
-                }, 2000); //delay
-            }
-        }, 100); //typing speed
-        return () => clearInterval(typingInterval);
-    }, [typingIndex, currentRoleIndex, roles]);
-
-    return (
-        <div className="relative flex items-center justify-center h-screen px-4 sm:px-8 md:px-16 lg:px-24">
-            <div className="absolute text-white text-center md:text-left lg:left-16">
-                <div className=" h-10"><span className="block text-lg sm:text-xl md:text-2xl lg:text-3xl">{displayedText}</span></div>
-                
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-                    {`Heyya, I'm `}
-                    <span className="text-red-500">Genious</span> Bajracharya
-                </h1>
-                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl">from Kathmandu, Nepal</h2>
-            </div>
+  return (
+    <div className="relative flex flex-col items-center justify-center w-full px-4 sm:px-8 md:px-16 lg:px-24">
+      <motion.div
+        className="text-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <div className="h-12 overflow-hidden mb-2">
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={currentRoleIndex}
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="block text-xl sm:text-2xl md:text-3xl text-muted-foreground font-light tracking-wide"
+            >
+              {roles[currentRoleIndex]}
+            </motion.span>
+          </AnimatePresence>
         </div>
-    );
+
+        <motion.h1
+          className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-6"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          {`Heyya, I'm `}
+          <span className="text-primary relative inline-block">
+            Genious
+            <motion.span
+              className="absolute -bottom-2 left-0 w-full h-1 bg-primary/30 rounded-full"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            />
+          </span>{" "}
+          Bajracharya
+        </motion.h1>
+
+        <motion.h2
+          className="text-2xl sm:text-3xl md:text-4xl text-foreground/80 font-medium mb-8"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          from Kathmandu, Nepal
+        </motion.h2>
+
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <Button
+            size="lg"
+            className="rounded-full px-8 py-6 text-lg group cursor-pointer"
+            onClick={() => router.push("#projects")}
+          >
+            View My Work
+            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+          </Button>
+        </motion.div>
+      </motion.div>
+    </div>
+  );
 }

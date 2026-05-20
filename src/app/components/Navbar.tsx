@@ -1,61 +1,76 @@
-'use client'
-import { useRouter } from "next/navigation"
+"use client";
+
+import { useRouter } from "next/navigation";
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-  } from "@/components/ui/dropdown-menu"
-  import { useState } from "react"
-  import { UilBars } from '@iconscout/react-unicons'
-  import { Button } from "@/components/ui/button"
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 
-  
-export default function Navbar(){
-    const router= useRouter()
-    const [menu,setMenu]=useState(false);
+export default function Navbar() {
+  const router = useRouter();
 
-    const toggleMenu = () => {
-        setMenu(!menu)
-      }
+  return (
+    <div className="h-16 w-full py-4 px-6 lg:px-16 flex items-center justify-between sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b">
+      <div className="cursor-pointer text-3xl font-bold text-foreground">
+        <span className="text-primary tracking-tighter">G</span>enie
+      </div>
 
-    const about =()=>{
-        router.push('#about')
-    }
-    
-    return(
-        <div className=" h-16 w-full py-4 px-6  lg:px-16 flex justify-between bg-transparent">
-            <div className=" cursor-pointer text-white text-4xl"> <span className="text-cyan-400">G</span>enie</div>
-            <div className="hidden lg:block">
-                <div className=" flex gap-5 text-white ">
-                    <div onClick={()=> router.push('#about')}  className=" hover:border-b-2 hover:border-cyan-400 hover:-translate-y-1 hover:scale-110 transition-all duration-500 cursor-pointer">About</div>
-                    <div onClick={()=> router.push('#contact')} className=" hover:border-b-2 hover:border-cyan-400 hover:-translate-y-1 hover:scale-110 transition-all duration-500 cursor-pointer">Contact</div>
-                    <div onClick={()=> router.push('#projects')} className=" hover:border-b-2 hover:border-cyan-400 hover:-translate-y-1 hover:scale-110  transition-all  duration-500 cursor-pointer">Projects</div>
-                </div>
-            </div>
-            
-            <div className="lg:hidden">
-                <DropdownMenu>
-                    <DropdownMenuTrigger>
-                        
-                            <UilBars className=" text-white hover:bg-gray-200"/>
-                       
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="bg-neutral-950 text-gray-200 bg-opacity-60">
-                        
-                        <DropdownMenuItem onClick={()=>router.push('#about')}>About</DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem onClick={()=>router.push('#contact')}>Contact</DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem onClick={()=>router.push('#projects')}>Projects</DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-                
-            </div>
+      <div className="hidden lg:flex items-center gap-8">
+        <div className="flex gap-6 text-foreground font-medium">
+          <div
+            onClick={() => router.push("#about")}
+            className="hover:text-primary transition-colors cursor-pointer"
+          >
+            About
+          </div>
+          <div
+            onClick={() => router.push("#projects")}
+            className="hover:text-primary transition-colors cursor-pointer"
+          >
+            Projects
+          </div>
+          <div
+            onClick={() => router.push("#contact")}
+            className="hover:text-primary transition-colors cursor-pointer"
+          >
+            Contact
+          </div>
         </div>
-    )
-}
+        <ThemeToggle />
+      </div>
 
-// https://geniousbajracharya.netlify.app/
+      <div className="lg:hidden flex items-center gap-4">
+        <ThemeToggle />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon">
+              <Menu className="h-6 w-6" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align="end"
+            className="w-48 bg-background/95 backdrop-blur-md"
+          >
+            <DropdownMenuItem onClick={() => router.push("#about")}>
+              About
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => router.push("#projects")}>
+              Projects
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => router.push("#contact")}>
+              Contact
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+    </div>
+  );
+}

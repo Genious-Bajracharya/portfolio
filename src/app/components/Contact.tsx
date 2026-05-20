@@ -1,128 +1,221 @@
-'use client'
-import { useState, FormEvent, ChangeEvent } from "react"
-import { UilPhone,UilEnvelope,UilImport,UilLinkedin,UilGithub,UilFacebook ,UilInstagram   } from '@iconscout/react-unicons'
-// import { useToast } from "@/hooks/use-toast"
-import { useToast } from "@/hooks/use-toast"
+"use client";
+
+import { useState, ChangeEvent, FormEvent } from "react";
+import {
+  Phone,
+  Mail,
+  Linkedin,
+  Github,
+  Facebook,
+  Instagram,
+  Download,
+  Send,
+} from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 interface ContactData {
-    fullname: string;
-    email: string;
-    message: string;
-  }
-
-export default function Contact(){
-    const { toast } = useToast()
-
-    const [formData, setFormData] = useState<ContactData>({
-        fullname: '',
-        email: '',
-        message: '',
-      });
-
-      const formHandle = async (e: FormEvent<HTMLFormElement>) => {
-       
-        e.preventDefault();
-    
-        try {
-            
-          const response = await fetch('/api/sendEmail', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData), 
-          });
-    
-          if (response.ok) {
-            toast({
-              title: "Contact Status",
-              description: "Email sent Successfully!",
-            })
-            setFormData({ fullname: '', email: '', message: '' });
-          } else {
-            const data = await response.json();
-            toast({
-              title: "Contact Status",
-              description: data.error || 'Error sending email.',
-            })
-          }
-        } catch (error) {
-          toast({
-            title: "Contact Status",
-            description: "Network error or server issue.",
-          })
-        }
-      };
-      
-
-    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-      };    
-    // const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    //     const { name, value } = e.target;
-    //     setFormData({ ...formData, [name]: value });
-    // };
-
-  
-    const handledownloadCv = ()=>{
-        const link = document.createElement('a');
-        link.href = '/cv.pdf'; 
-        link.download = 'GeniousBajracharya_CV.pdf'; 
-        link.click();
-    }
-
-    return(
-        <div className="flex flex-col lg:flex-row gap-5 p-4 lg:px-20 justify-between h-auto lg:py-16  text-gray-200 " id="contact">
-            <div className="flex flex-col gap-5">
-                <h1 className="text-6xl font-bold mb-4 text-white">Contact Me</h1>
-                <p className="flex items-center">
-                    <UilEnvelope  className="mr-2 text-cyan-400" />
-                    bajracharyagenious@gmail.com
-                </p>
-                <p className="flex items-center"><UilPhone  className="mr-2 text-cyan-400" />9861532823</p>
-                <div className="flex gap-5">
-                    <a href="https://www.linkedin.com/in/genious-bajracharya-573964211/"><UilLinkedin  className="  cursor-pointer rounded-lg text-cyan-400 hover:bg-cyan-400 hover:text-gray-200"/></a>
-                    <a href="https://github.com/Genious-Bajracharya"><UilGithub className=" cursor-pointer rounded-lg text-cyan-400 hover:bg-cyan-400 hover:text-gray-200"/></a>
-                    <a href="https://www.instagram.com/_genious.__/"><UilInstagram  className="cursor-pointer rounded-lg text-cyan-400 hover:bg-cyan-400 hover:text-gray-200"/></a>
-                    <a href="https://www.facebook.com/profile.php?id=100009409115809"><UilFacebook  className=" cursor-pointer rounded-lg text-cyan-400 hover:bg-cyan-400 hover:text-gray-200"/></a>
-                    
-                </div>
-                <button onClick={handledownloadCv} className=" p-2 bg-transparent border border-cyan-400 rounded-sm w-48 hover:bg-cyan-400 transition-colors  ease-in-out delay-200">Download CV  &#8595;</button>
-            </div>
-            <div className="lg:w-3/5  w-full ">
-                <form onSubmit={formHandle} className="flex flex-col gap-5">
-                    <input 
-                        className=" bg-zinc-800 rounded-lg text-slate-400 h-12 w-full p-2" 
-                        type="text"
-                        name="fullname"
-                        placeholder="Full Name"
-                        value={formData.fullname}
-                        onChange={handleChange}
-                        required 
-                    />
-                    <input 
-                        className=" bg-zinc-800 rounded-lg text-slate-400 h-12 w-full p-2" 
-                        name="email"
-                        value={formData.email}
-                        placeholder="Your Email" 
-                        onChange={handleChange}
-                        required
-                    />
-                    <textarea 
-                        name="message"
-                        rows={5} 
-                        className=" bg-zinc-800 rounded-lg text-slate-400  w-full p-2"
-                        value={formData.message}
-                        placeholder="Your Message"
-                        onChange={handleChange}
-                        required
-                    />
-                    <button className=" p-2 bg-transparent  mx-auto border border-cyan-400 rounded-sm w-32 hover:bg-cyan-400 transition-colors  ease-in-out delay-200  ">  Submit </button>
-                </form>
-                
-                
-            </div>
-        </div>
-    )
+  fullname: string;
+  email: string;
+  message: string;
 }
 
+export default function Contact() {
+  const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState<ContactData>({
+    fullname: "",
+    email: "",
+    message: "",
+  });
+
+  const formHandle = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/sendEmail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Message Sent",
+          description: "Thank you! I'll get back to you soon.",
+        });
+        setFormData({ fullname: "", email: "", message: "" });
+      } else {
+        const data = await response.json();
+        toast({
+          variant: "destructive",
+          title: "Sending Failed",
+          description: data.error || "Error sending email.",
+        });
+      }
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Network Error",
+        description: "Please try again later.",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleDownloadCv = () => {
+    const link = document.createElement("a");
+    link.href = "/cv.pdf";
+    link.download = "GeniousBajracharya_CV.pdf";
+    link.click();
+  };
+
+  return (
+    <div
+      className="w-full max-w-7xl mx-auto px-4 lg:px-20 py-16 flex flex-col lg:flex-row gap-16"
+      id="contact"
+    >
+      <motion.div
+        initial={{ opacity: 0, x: -30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="flex flex-col gap-8 lg:w-[45%]"
+      >
+        <div>
+          <h2 className="text-5xl md:text-6xl font-bold mb-4 tracking-tight">
+            Let&apos;s <span className="text-primary">Connect</span>
+          </h2>
+          <p className="text-muted-foreground text-lg">
+            I&apos;m currently available for new opportunities. Whether you have a
+            question or just want to say hi, I&apos;ll try my best to get back to you!
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-6 text-foreground/80 font-medium">
+          <a
+            href="mailto:bajracharyagenious@gmail.com"
+            className="flex items-center gap-4 hover:text-primary transition-colors p-4 rounded-xl hover:bg-muted/30 border border-transparent hover:border-border/50"
+          >
+            <div className="p-3 bg-primary/10 rounded-full text-primary">
+              <Mail className="w-6 h-6" />
+            </div>
+            <span className="text-lg">bajracharyagenious@gmail.com</span>
+          </a>
+          <div className="flex items-center gap-4 p-4 rounded-xl hover:bg-muted/30 border border-transparent hover:border-border/50 transition-colors">
+            <div className="p-3 bg-primary/10 rounded-full text-primary">
+              <Phone className="w-6 h-6" />
+            </div>
+            <span className="text-lg">+977 9861532823</span>
+          </div>
+        </div>
+
+        <div className="flex gap-4">
+          {[
+            { icon: Linkedin, href: "https://www.linkedin.com/in/genious-bajracharya-573964211/" },
+            { icon: Github, href: "https://github.com/Genious-Bajracharya" },
+            { icon: Instagram, href: "https://www.instagram.com/_genious.__/" },
+            { icon: Facebook, href: "https://www.facebook.com/profile.php?id=100009409115809" },
+          ].map((social, i) => (
+            <a
+              key={i}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 bg-muted/50 rounded-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+            >
+              <social.icon className="w-5 h-5" />
+            </a>
+          ))}
+        </div>
+
+        <div className="mt-4">
+          <Button
+            size="lg"
+            variant="outline"
+            className="rounded-full px-8 gap-2 group"
+            onClick={handleDownloadCv}
+          >
+            Download CV
+            <Download className="w-4 h-4 group-hover:-translate-y-1 transition-transform" />
+          </Button>
+        </div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, x: 30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="lg:w-[55%] bg-card border border-border p-8 rounded-3xl shadow-lg"
+      >
+        <form onSubmit={formHandle} className="flex flex-col gap-6">
+          <div className="space-y-1">
+            <label className="text-sm font-medium text-foreground/80 pl-1">
+              Full Name
+            </label>
+            <Input
+              type="text"
+              name="fullname"
+              placeholder="John Doe"
+              value={formData.fullname}
+              onChange={handleChange}
+              required
+              className="h-14 rounded-2xl bg-muted/30 focus-visible:ring-primary border-none"
+            />
+          </div>
+          <div className="space-y-1">
+            <label className="text-sm font-medium text-foreground/80 pl-1">
+              Email Address
+            </label>
+            <Input
+              type="email"
+              name="email"
+              placeholder="john@example.com"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="h-14 rounded-2xl bg-muted/30 focus-visible:ring-primary border-none"
+            />
+          </div>
+          <div className="space-y-1 flex-1">
+            <label className="text-sm font-medium text-foreground/80 pl-1">
+              Message
+            </label>
+            <Textarea
+              name="message"
+              rows={6}
+              placeholder="Your message here..."
+              value={formData.message}
+              onChange={handleChange}
+              required
+              className="resize-none rounded-2xl bg-muted/30 focus-visible:ring-primary border-none"
+            />
+          </div>
+          <Button
+            type="submit"
+            size="lg"
+            disabled={loading}
+            className="w-full rounded-2xl h-14 mt-2 text-lg font-medium group"
+          >
+            {loading ? "Sending..." : "Send Message"}
+            {!loading && <Send className="ml-2 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
+          </Button>
+        </form>
+      </motion.div>
+    </div>
+  );
+}

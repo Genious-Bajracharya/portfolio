@@ -1,89 +1,55 @@
-'use client'
-import Image from "next/image"
-import { UilArrowRight } from '@iconscout/react-unicons'
-import { Button } from "@/components/ui/button"
+"use client";
 
-import { useRouter } from "next/navigation"
-export default function OtherProjects(){
-    const router= useRouter()
-    return(
-        <div className=" p-4 lg:p-12 bg-neutral-950">
-            <h1 className=" text-gray-200 text-4xl ">Other Projects</h1>
-            <div className="flex flex-col lg:flex-row gap-5 mt-2 ">
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { ExternalLink } from "lucide-react";
+import { motion } from "framer-motion";
+import { projectsData } from "@/lib/projects";
 
-                <div onClick={()=> router.push('/projects/organichealthcare')} className="  rounded-xl cursor-pointer group overflow-hidden">
-                    <div className="h-full w-full relative ">
-                        <Image
-                            className="rounded-lg h-full w-full object-cover"
-                            src="/organic5.PNG"
-                            alt="Project 1"
-                            style={{
-                                width: '100%',
-                                height: 'auto',
-                              }}
-                              width={500}
-                              height={500}
-                        />
-                        <div className=" h-5/6 absolute bottom-0 left-0 right-0 bg-black bg-opacity-80 text-white text-center p-4 rounded-b-lg opacity-0 transform translate-y-full group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                            <div className="flex flex-col h-full justify-between">
-                                <div>
-                                    <p>Organic Healthcare</p>
-                                    <p>A simple app made for the purpose of writing blogs</p>
-                                </div>
-                                <Button variant={"outline"} className="mx-auto text-black hover:bg-transparent hover:text-gray-200" >See More <UilArrowRight/></Button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div onClick={()=> router.push('/projects/fakestore')} className="  rounded-xl cursor-pointer group overflow-hidden">
-                    <div className="h-full w-full relative ">
-                        <Image
-                            className="rounded-lg h-full w-full object-cover"
-                            src="/fakestore.jpeg"
-                            alt="Project 1"
-                            style={{
-                                width: '100%',
-                                height: 'auto',
-                              }}
-                              width={500}
-                              height={500}
-                        />
-                        <div className=" h-5/6 absolute bottom-0 left-0 right-0 bg-black bg-opacity-80 text-white text-center p-4 rounded-b-lg opacity-0 transform translate-y-full group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                            <div className="flex flex-col h-full justify-between">
-                                <div>
-                                    <p>Fake Store</p>
-                                    <p>An e-commerce app made using Fake Store API</p>
-                                </div>
-                                <Button variant={"outline"} className="mx-auto text-black hover:bg-transparent hover:text-gray-200" >See More <UilArrowRight/></Button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div onClick={()=> router.push('/projects/fitnessapp')} className="  rounded-xl cursor-pointer group overflow-hidden">
-                    <div className="h-full w-full relative ">
-                        <Image
-                            className="rounded-lg h-full w-full object-cover"
-                            src="/Fitness1.PNG"
-                            alt="Project 1"
-                            style={{
-                                width: '100%',
-                                height: 'auto',
-                              }}
-                              width={500}
-                              height={500}
-                        />
-                        <div className=" h-5/6 absolute bottom-0 left-0 right-0 bg-black bg-opacity-80 text-white text-center p-4 rounded-b-lg opacity-0 transform translate-y-full group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                            <div className="flex flex-col h-full justify-between">
-                                <div>
-                                    <p>Fitness App</p>
-                                    <p>A simple  platform for recording your fitness journey</p>
-                                </div>
-                                <Button variant={"outline"} className="mx-auto text-black hover:bg-transparent hover:text-gray-200" >See More <UilArrowRight/></Button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+export default function OtherProjects() {
+  const router = useRouter();
+  const otherProjects = projectsData.slice(0, 3); // Showing first 3 for simplicity, can dynamically shuffle if needed
+
+  return (
+    <div className="w-full">
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-3xl font-bold text-foreground">Explore Other Projects</h2>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {otherProjects.map((project, index) => (
+          <motion.div
+            key={project.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="group relative rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all border border-border/50 bg-card"
+            onClick={() => router.push(`/projects/${project.id}`)}
+          >
+            <div className="relative h-48 w-full overflow-hidden">
+              <Image
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                src={project.images[0]}
+                alt={project.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500" />
             </div>
-        </div>
-    )
+
+            <div className="p-5 bg-card flex flex-col justify-between transition-colors">
+              <div>
+                <h3 className="text-lg font-bold text-card-foreground group-hover:text-primary transition-colors">
+                  {project.title}
+                </h3>
+              </div>
+              <div className="mt-4 flex items-center text-sm font-semibold text-primary opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                View Project <ExternalLink className="ml-2 w-4 h-4" />
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
 }
