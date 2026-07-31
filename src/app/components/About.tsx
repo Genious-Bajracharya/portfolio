@@ -14,7 +14,7 @@ export default function About() {
         transition={{ duration: 0.7 }}
       >
         <Image
-          src="/about.jpg"
+          src="/me.jpeg"
           alt="Genious Bajracharya"
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-105"

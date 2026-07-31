@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
 
 const skillLogos: Record<string, string> = {
   "React.js": "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/react.svg",
@@ -82,34 +81,40 @@ export default function SkillsExperienceEducation() {
       animate="visible"
       exit="exit"
       transition={{ duration: 0.3 }}
-      className="space-y-8"
+      className="space-y-6"
     >
       {skillCategories.map((category, idx) => (
         <motion.div
           key={category.title}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: idx * 0.05 }}
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 15 }}
+          viewport={{ once: false, margin: "-100px" }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <h3 className="text-lg font-bold text-foreground mb-4">{category.title}</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {category.skills.map((skill) => (
+          <h3 className="text-base font-bold text-foreground mb-3">{category.title}</h3>
+          <div className="flex flex-wrap gap-2">
+            {category.skills.map((skill, skillIdx) => (
               <motion.div
                 key={skill}
-                whileHover={{ scale: 1.08, y: -4 }}
-                className="flex flex-col items-center gap-2 p-4 rounded-xl bg-muted/50 hover:bg-primary/10 border border-border/50 hover:border-primary/50 transition-all group cursor-default"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: false, margin: "-100px" }}
+                transition={{ duration: 0.4, delay: skillIdx * 0.05 }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                className="flex flex-col items-center gap-1.5 px-3 py-2.5 rounded-lg bg-muted/50 hover:bg-primary/10 border border-border/50 hover:border-primary/50 transition-all group cursor-default"
               >
-                <div className="relative w-10 h-10 flex items-center justify-center">
+                <div className="relative w-7 h-7 flex items-center justify-center">
                   <img
                     src={skillLogos[skill] || skillLogos["REST APIs"]}
                     alt={skill}
-                    className="w-8 h-8 object-contain dark:invert dark:brightness-110 transition-all group-hover:dark:brightness-125"
+                    className="w-6 h-6 object-contain dark:invert dark:brightness-110 transition-all group-hover:dark:brightness-125"
                     onError={(e) => {
                       (e.target as HTMLImageElement).style.display = "none";
                     }}
                   />
                 </div>
-                <span className="text-xs font-medium text-center text-foreground/80 group-hover:text-foreground">
+                <span className="text-[10px] font-medium text-center text-foreground/80 group-hover:text-foreground leading-tight">
                   {skill}
                 </span>
               </motion.div>
@@ -119,18 +124,14 @@ export default function SkillsExperienceEducation() {
       ))}
 
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: skillCategories.length * 0.05 }}
-        className="bg-secondary/10 border border-secondary/30 rounded-2xl p-4 mt-8"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: false, margin: "-100px" }}
+        transition={{ duration: 0.5 }}
+        className="bg-secondary/10 border border-secondary/30 rounded-xl p-3 mt-6"
       >
-        <p className="text-sm text-foreground/70 flex items-start gap-2">
-          <span className="text-lg mt-1">💡</span>
-          <span>
-            <strong>Familiar with:</strong> Docker containerization, CI/CD pipelines, API design
-            patterns, RESTful services, real-time applications, responsive design, and performance
-            optimization.
-          </span>
+        <p className="text-xs text-foreground/70">
+          <strong>Familiar with:</strong> Docker containerization, CI/CD pipelines, API design patterns, real-time applications, responsive design, and performance optimization.
         </p>
       </motion.div>
     </motion.div>
