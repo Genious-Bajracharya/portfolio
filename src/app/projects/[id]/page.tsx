@@ -49,6 +49,13 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
             <p className="text-lg text-muted-foreground leading-relaxed">
               {project.description}
             </p>
+            <p>Project Origin: <span className="text-muted-foreground">{project.type}</span></p>
+            <p>
+              Stack: 
+                {project.stack?.map((s,index) => (
+                  <span className="text-muted-foreground" key={index}> {s},</span>
+                ))}
+            </p>
           </div>
 
           <div className="bg-gradient-to-br from-muted/50 to-muted/10 p-8 rounded-3xl border border-border/50 shadow-sm relative overflow-hidden">

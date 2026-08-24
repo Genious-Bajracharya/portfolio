@@ -17,7 +17,7 @@ export default function Navbar() {
 
   return (
     <div className="h-16 w-full py-4 px-6 lg:px-16 flex items-center justify-between sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b">
-      <div className="cursor-pointer text-3xl font-bold text-foreground">
+      <div onClick={() => router.push("/")} className="cursor-pointer text-3xl font-bold text-foreground">
         <span className="text-primary tracking-tighter">G</span>enie
       </div>
 

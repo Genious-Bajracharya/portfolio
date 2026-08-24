@@ -81,7 +81,7 @@ export default function AllProjects() {
             >
               <div className="relative h-64 w-full overflow-hidden shrink-0">
                 <Image
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="object-fit transition-transform duration-700 group-hover:scale-110"
                   src={project.images[0]}
                   alt={project.title}
                   fill
@@ -93,8 +93,9 @@ export default function AllProjects() {
               <div className="p-6 md:p-8 bg-card flex flex-col flex-1 justify-between transition-colors border-t border-border/50">
                 <div>
                   <h3 className="text-2xl font-bold text-card-foreground mb-3 group-hover:text-primary transition-colors">
-                    {project.title}
+                    {project.title} 
                   </h3>
+                  <p>({project.type})</p>
                   <p className="text-muted-foreground text-sm line-clamp-3 mb-6">
                     {project.description}
                   </p>

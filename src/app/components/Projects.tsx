@@ -6,33 +6,10 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { projectsData } from "@/lib/projects";
 
 export default function Projects() {
   const router = useRouter();
-
-  const projects = [
-    {
-      title: "Organic Healthcare",
-      description: "A fullstack e-commerce application for organic products.",
-      tags: ["Next.js", "Tailwind", "Node.js"],
-      imageSrc: "/organic1.jpeg",
-      link: "/projects/organichealthcare",
-    },
-    {
-      title: "ChatApp",
-      description: "A real-time full-stack chat application with Socket.IO.",
-      tags: ["Socket.IO", "Express", "React"],
-      imageSrc: "/chatapp1.png",
-      link: "/projects/chatapp",
-    },
-    {
-      title: "Ghar Bhada",
-      description: "A rental property listing platform for Nepal.",
-      tags: ["Next.js", "Prisma", "Leaflet"],
-      imageSrc: "/gharbhada1.png",
-      link: "/projects/gharbhada",
-    },
-  ];
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 lg:px-20 py-16" id="projects">
@@ -60,7 +37,7 @@ export default function Projects() {
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {projects.map((project, index) => (
+        {projectsData.slice(0,6).map((project, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 30 }}
@@ -68,12 +45,12 @@ export default function Projects() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
             className="group relative rounded-3xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-shadow bg-card"
-            onClick={() => router.push(project.link)}
+            onClick={() => router.push(project.liveUrl ?? "")}
           >
             <div className="relative h-64 w-full overflow-hidden">
               <Image
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
-                src={project.imageSrc}
+                src={project.images[0]}
                 alt={project.title}
                 fill
                 priority={index === 0}
@@ -84,14 +61,15 @@ export default function Projects() {
 
             <div className="p-6 md:p-8 bg-card border-t border-border flex flex-col justify-between h-56 transition-colors">
               <div>
-                <h3 className="text-2xl font-bold text-card-foreground mb-2 group-hover:text-primary transition-colors">
+                <h3 className="text-2xl inline-flex gap-4 items-center font-bold text-card-foreground mb-2 group-hover:text-primary transition-colors">
                   {project.title}
+                  <span className="text-sm text-muted-foreground">({project.type})</span>
                 </h3>
                 <p className="text-muted-foreground text-sm line-clamp-2 mb-4">
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
+                  {project.stack.slice(0,3).map((tag) => (
                     <span
                       key={tag}
                       className="text-xs font-medium px-2.5 py-1 bg-secondary text-secondary-foreground rounded-md"

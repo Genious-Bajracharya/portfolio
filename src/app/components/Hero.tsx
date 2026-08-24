@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function Hero() {
-  const roles = ["Frontend Developer", "React Developer", "MERN Stack Expert"];
+  const roles = ["Software Engineer", "Fullstack Developer", "Typescript Developer"];
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const router = useRouter();
 
