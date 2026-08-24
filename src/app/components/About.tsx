@@ -34,11 +34,11 @@ export default function About() {
           About <span className="text-primary">Me</span>
         </h2>
         <p className="text-lg text-foreground/80 leading-relaxed mb-10">
-          An enthusiastic Full Stack Developer passionate about learning new technologies,
+          {`An enthusiastic Full Stack Developer passionate about learning new technologies,
           building pixel-perfect UIs from designs, and experimenting with new ideas.
           Proficient in React, Next.js, and the MERN stack, I thrive translating
           design systems into interactive experiences. I'm constantly exploring emerging
-          technologies and pushing creative boundaries in web development.
+          technologies and pushing creative boundaries in web development.`}
         </p>
 
         <div className="space-y-4">
