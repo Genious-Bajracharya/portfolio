@@ -26,7 +26,7 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="w-full lg:w-3/5"
+          className="w-full lg:w-3/5 flex-col gap-8"
         >
           <CarouselGallery
             images={project.images}
@@ -34,6 +34,23 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
             autoplay
             autoplayDelay={5000}
           />
+
+          <div className="flex flex-wrap gap-4 mt-2">
+            {project.githubUrl && (
+              <Link href={project.githubUrl} target="_blank">
+                <Button size="lg" className="rounded-full px-8 gap-2 group hover:shadow-lg hover:shadow-primary/20 transition-all">
+                  <Github size={20} className="group-hover:scale-110 transition-transform" /> View on GitHub
+                </Button>
+              </Link>
+            )}
+            {project.liveUrl && (
+              <Link href={project.liveUrl} target="_blank">
+                <Button size="lg" variant="outline" className="rounded-full px-8 gap-2 group hover:bg-primary/5 transition-all outline-primary/50">
+                  <Globe size={20} className="group-hover:text-primary transition-colors" /> Visit Site
+                </Button>
+              </Link>
+            )}
+          </div>
         </motion.div>
 
         <motion.div
@@ -82,22 +99,7 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
             </ul>
           </div>
 
-          <div className="flex flex-wrap gap-4 mt-auto">
-            {project.githubUrl && (
-              <Link href={project.githubUrl} target="_blank">
-                <Button size="lg" className="rounded-full px-8 gap-2 group hover:shadow-lg hover:shadow-primary/20 transition-all">
-                  <Github size={20} className="group-hover:scale-110 transition-transform" /> View on GitHub
-                </Button>
-              </Link>
-            )}
-            {project.liveUrl && (
-              <Link href={project.liveUrl} target="_blank">
-                <Button size="lg" variant="outline" className="rounded-full px-8 gap-2 group hover:bg-primary/5 transition-all outline-primary/50">
-                  <Globe size={20} className="group-hover:text-primary transition-colors" /> Visit Site
-                </Button>
-              </Link>
-            )}
-          </div>
+          
         </motion.div>
       </div>
 

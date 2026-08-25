@@ -45,7 +45,7 @@ export default function Projects() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
             className="group relative rounded-3xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-shadow bg-card"
-            onClick={() => router.push(project.liveUrl ?? "")}
+            onClick={() => router.push(`/projects/${project.id}`)}
           >
             <div className="relative h-64 w-full overflow-hidden">
               <Image
