@@ -13,7 +13,7 @@ export default function Hero() {
 
   const handleDownloadCv = () => {
     const link = document.createElement("a");
-    link.href = "/cv.pdf";
+    link.href = "/GeniousBajracharya_CV.pdf";
     link.download = "GeniousBajracharya_CV.pdf";
     link.click();
   };
@@ -80,7 +80,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="flex gap-8 justify-center "
+          className="md: flex  flex-col  gap-8 justify-center "
         >
           <Button
             size="lg"
