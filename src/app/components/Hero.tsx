@@ -3,13 +3,20 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function Hero() {
   const roles = ["Software Engineer", "Fullstack Developer", "Typescript Developer"];
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const router = useRouter();
+
+  const handleDownloadCv = () => {
+    const link = document.createElement("a");
+    link.href = "/cv.pdf";
+    link.download = "GeniousBajracharya_CV.pdf";
+    link.click();
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -61,18 +68,19 @@ export default function Hero() {
         </motion.h1>
 
         <motion.h2
-          className="text-2xl sm:text-3xl md:text-4xl text-foreground/80 font-medium mb-8"
+          className="text-xl sm:text-3xl md:text-xl text-foreground/80 font-medium mb-8"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          from Kathmandu, Nepal
+          1+ year professional experience · React · Next.js · TypeScript · Node.js · PostgreSQLl
         </motion.h2>
 
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
+          className="flex gap-8 justify-center "
         >
           <Button
             size="lg"
@@ -81,6 +89,15 @@ export default function Hero() {
           >
             View My Work
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+          </Button>
+
+          <Button
+            size="lg"
+            className="rounded-full px-8 py-6 text-lg group cursor-pointer"
+            onClick={handleDownloadCv}
+          >
+            Download Cv
+            <Download className="ml-2 w-5 h-5 group-hover:-translate-y-1 transition-transform" />
           </Button>
         </motion.div>
       </motion.div>

@@ -34,7 +34,7 @@ export default function About() {
           About <span className="text-primary">Me</span>
         </h2>
         <p className="text-lg text-foreground/80 leading-relaxed mb-10">
-          {`An enthusiastic Full Stack Developer passionate about learning new technologies,
+          {`Full-Stack Developer building production-ready web applications with React, Next.js and Node.js. Passionate about learning new technologies,
           building pixel-perfect UIs from designs, and experimenting with new ideas.
           Proficient in React, Next.js, and the MERN stack, I thrive translating
           design systems into interactive experiences. I'm constantly exploring emerging
